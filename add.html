@@ -19,9 +19,9 @@
   </script>
   <title>Contacts App</title>
 </head>
-<body style="background-color: rgb(75, 74, 74);">
+<body style="background-color: rgb(75, 60, 46);">
   
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #002244;">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #363636;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img src="static/img/logo.png " alt="" width="30" height="30" style="margin-right: 10px;">
@@ -36,7 +36,7 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="add.html">Add Contact</a>
+            <a class="nav-link active" aria-current="page" href="#">Add Contact</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Regresar al Portfolio</a>
@@ -52,44 +52,42 @@
 
 
   <main>
-    <div class="container pt-4 p-3">
-      <div class="row">
-
-        <div class="col-md-4 mb-3">
-          <div class="card text-center" style="background-color: #002244;">
-            <div class="card-body"> 
-              <h3 class="card-title text-capitalize">Contact Name 1</h3>
-              <p class="m-2">987654321</p>
-              <a href="#" class="btn btn-secondary mb-2">Edit Contact</a>
-              <a href="#" class="btn btn-danger mb-2">Delete Contact</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 mb-3">
-          <div class="card text-center" style="background-color: #002244;">
+    <div class="container pt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card text-center" style="background-color: #363636;">
+            <div class="card-header" style="background-color: #ff9900;;">Add contacts</div>
             <div class="card-body">
-              <h3 class="card-title text-capitalize">Contact Name 2</h3>
-              <p class="m-2">987654321</p>
-              <a href="#" class="btn btn-secondary mb-2">Edit Contact</a>
-              <a href="#" class="btn btn-danger mb-2">Delete Contact</a>
+              <form>
+                <div class="mb-3 row">
+                  <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
+    
+                  <div class="col-md-6">
+                    <input id="name" type="text" class="form-control" name="name" required autocomplete="name" autofocus>
+                  </div>
+                </div>
+    
+                <div class="mb-3 row">
+                  <label for="phone_number" class="col-md-4 col-form-label text-md-end">Phone Number</label>
+    
+                  <div class="col-md-6">
+                    <input id="phone_number" type="tel" class="form-control" name="phone_number" required autocomplete="phone_number" autofocus>
+                  </div>
+                </div>
+    
+                <div class="mb-3 row">
+                  <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-
-        <div class="col-md-4 mb-3">
-          <div class="card text-center" style="background-color: #002244;">
-            <div class="card-body">
-              <h3 class="card-title text-capitalize">Contact Name 3</h3>
-              <p class="m-2">987654321</p>
-              <a href="#" class="btn btn-secondary mb-2">Edit Contact</a>
-              <a href="#" class="btn btn-danger mb-2">Delete Contact</a>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </main>
+
+
 </body>
 </html>
