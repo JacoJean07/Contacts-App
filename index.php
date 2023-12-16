@@ -1,3 +1,17 @@
+<?php
+
+$contacts = [
+  ["name" => "Jean", "phone_number" => "0981691319"],
+  ["name" => "Pablo", "phone_number" => "98234634324"],
+  ["name" => "Jesus", "phone_number" => "763549123213"],
+  ["name" => "Shirley", "phone_number" => "13217685434"],
+  ["name" => "Jordan", "phone_number" => "43575683465"],
+];
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +33,9 @@
   </script>
   <title>Contacts App</title>
 </head>
-<body style="background-color: rgb(75, 74, 74);">
+<body style="background-color: rgb(75, 60, 46);">
   
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #002244;">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #363636;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img src="static/img/logo.png " alt="" width="30" height="30" style="margin-right: 10px;">
@@ -55,38 +69,18 @@
     <div class="container pt-4 p-3">
       <div class="row">
 
-        <div class="col-md-4 mb-3">
-          <div class="card text-center" style="background-color: #002244;">
-            <div class="card-body"> 
-              <h3 class="card-title text-capitalize">Contact Name 1</h3>
-              <p class="m-2">987654321</p>
-              <a href="#" class="btn btn-secondary mb-2">Edit Contact</a>
-              <a href="#" class="btn btn-danger mb-2">Delete Contact</a>
+        <?php foreach ($contacts as $contact): ?>
+          <div class="col-md-4 mb-3">
+            <div class="card text-center" style="background-color: #363636;">
+              <div class="card-body"> 
+                <h3 class="card-title text-capitalize"> <?= $contact["name"]?> </h3>
+                <p class="m-2"><?= $contact["phone_number"]?></p>
+                <a href="#" class="btn btn-secondary mb-2">Edit Contact</a>
+                <a href="#" class="btn btn-danger mb-2">Delete Contact</a>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="col-md-4 mb-3">
-          <div class="card text-center" style="background-color: #002244;">
-            <div class="card-body">
-              <h3 class="card-title text-capitalize">Contact Name 2</h3>
-              <p class="m-2">987654321</p>
-              <a href="#" class="btn btn-secondary mb-2">Edit Contact</a>
-              <a href="#" class="btn btn-danger mb-2">Delete Contact</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 mb-3">
-          <div class="card text-center" style="background-color: #002244;">
-            <div class="card-body">
-              <h3 class="card-title text-capitalize">Contact Name 3</h3>
-              <p class="m-2">987654321</p>
-              <a href="#" class="btn btn-secondary mb-2">Edit Contact</a>
-              <a href="#" class="btn btn-danger mb-2">Delete Contact</a>
-            </div>
-          </div>
-        </div>
+        <?php endforeach ?>
 
       </div>
     </div>
