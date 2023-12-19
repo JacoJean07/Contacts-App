@@ -1,12 +1,13 @@
 <?php
-
-$contacts = [
-  ["name" => "Jean", "phone_number" => "0981691319"],
-  ["name" => "Pablo", "phone_number" => "98234634324"],
-  ["name" => "Jesus", "phone_number" => "763549123213"],
-  ["name" => "Shirley", "phone_number" => "13217685434"],
-  ["name" => "Jordan", "phone_number" => "43575683465"],
-];
+// si existe el fichero contacts.json entonces leer los contactos dentro de el mismo y asignarlos a la lista o array asociativo
+if (file_exists("contacts.json")) {
+  //como lo que hay en el .json es un string, hay que decodificarlo y luego con el file get, obtenemos los datos del archivo .json y los asignamos al array asociativo
+  // el true es porque al decodificar el .json nos pasa una sintaxis de objetos, por lo que crea un objeto por cada valor, entonces le decimos que true para que nos lo de con un formato de array asociativo, que funciona en php, si fuera java, no tendriamos que poner true
+  $contacts = json_decode(file_get_contents("contacts.json"), true);
+  //sino definir la variable contactos como vacia, o la lista en este caso
+} else {
+  $contacts = [];
+}
 
 ?>
 
@@ -50,7 +51,7 @@ $contacts = [
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="add.html">Add Contact</a>
+            <a class="nav-link active" aria-current="page" href="add.php">Add Contact</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Regresar al Portfolio</a>
@@ -68,7 +69,16 @@ $contacts = [
   <main>
     <div class="container pt-4 p-3">
       <div class="row">
-
+        <!-- si el array asociativo $contacts no tiene nada dentro, entonces imprimir el siguiente div -->
+        <?php if (count($contacts) == 0): ?>
+          <div class= "col-md-4 mx-auto">
+            <div class= "card card-body text-center">
+              <p>No contacts saved yet</p>
+              <a href="add.php" style="color: #ff9900;">Add One!</a>
+            </div>
+          </div>
+        <?php endif ?>
+        <!-- sirve para hacer una targeta por cada valor que tenga el array asociativo $contacts -->
         <?php foreach ($contacts as $contact): ?>
           <div class="col-md-4 mb-3">
             <div class="card text-center" style="background-color: #363636;">
