@@ -1,19 +1,32 @@
 <?php
 
 require "database.php";
+
+$error = null;
 //identifica el metodo que usa el server, en este caso si el metodo es POST procesa el if
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-  //declara variables y las asigna a los name de los input del form
-  $name = $_POST["name"];
-  $phoneNumber = $_POST["phone_number"];
-  
-  //mandar los datos a la base de datos
-  $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES ('$name', '$phoneNumber')");
-  //ahora lo ejecutamos
-  $statement->execute();
+  //se valida que no se envien datos vacios
+  if (empty($_POST["name"]) || empty($_POST["phone_number"])) {
+    $error = "POR FAVOR RELLENA LOS CAMPOS";
+    //validacion del numero de telefono para que no sea menor a 9 numeros
+  } elseif (strlen($_POST["phone_number"]) < 9){
+    $error = "Numero invalido, minimo 10 caracteres";
+  } else {
+    //declara variables y las asigna a los name de los input del form en caso de que el usuario no sea el navegador
+    $name = $_POST["name"];
+    $phoneNumber = $_POST["phone_number"];
+    
+    //mandar los datos a la base de datos
+    $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES (:name, :phone_number)");
+    //sanitizar valores para inyecciones sql
+    $statement->bindParam(":name", $_POST["name"]);
+    $statement->bindParam(":phone_number", $_POST["phone_number"]);
+    //ahora lo ejecutamos
+    $statement->execute();
 
-    //redirige al index.php
-  header("Location: index.php");
+      //redirige al index.php
+    header("Location: index.php");
+  }
 }
 
 ?>
@@ -80,6 +93,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
           <div class="card text-center" style="background-color: #363636;">
             <div class="card-header" style="background-color: #ff9900;;">Add contacts</div>
             <div class="card-body">
+              <!-- si hay un error mandar un danger -->
+              <?php if ($error): ?> 
+                <p class="text-danger">
+                  <?= $error ?>
+                </p>
+              <?php endif ?>
               <form method="POST" action="add.php">
                 <div class="mb-3 row">
                   <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
