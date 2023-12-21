@@ -10,9 +10,10 @@ $statement->execute([":id" => $id]);
 if ($statement->rowCount() == 0) {
   http_response_code(404);
   echo("HTTP 404 NOT FOUND (ID NO ENCONTRADO)");
+  return;
 }
 
-//ELIMINAMOS EL ROW CON EL ID DE LA TARGETA SELECCIONADA
+//ELIMINAMOS EL ROW CON EL ID DE LA TARGETA SELECCIONADA, nos ahorramos dos statement y ejecutamos en la misma linea
 $conn->prepare("DELETE FROM contacts WHERE id = :id")->execute([":id" => $id]);
 //REDIRIGIMOS AL INDEX.PHP
 header("Location: index.php");
