@@ -15,7 +15,7 @@ if ($statement->rowCount() == 0) {
 
 //ELIMINAMOS EL ROW CON EL ID DE LA TARGETA SELECCIONADA, nos ahorramos dos statement y ejecutamos en la misma linea
 $conn->prepare("DELETE FROM contacts WHERE id = :id")->execute([":id" => $id]);
-//REDIRIGIMOS AL INDEX.PHP
-header("Location: index.php");
+//REDIRIGIMOShome
+header("Location: home.php");
 
 ?>

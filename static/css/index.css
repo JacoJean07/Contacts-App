@@ -1,0 +1,24 @@
+.welcome {
+  margin: 0;
+  padding: 0;
+  background-image: url('../img/background.jpg'); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  height: 100vh; /* Establece la altura al 100% del viewport height (altura de la ventana del navegador) */
+  overflow: hidden; 
+}
+
+.navbar {
+    /* para fijar el navbar en la pantalla */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    /* para que se muestre delante de el contenido */
+    z-index: 1;
+}
+
+/* para que el contenido no se mezcle con el navbar */
+.container {
+    margin-top: 75px;
+}

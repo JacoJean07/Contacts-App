@@ -39,8 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
       ":phone_number" => $_POST["phone_number"],
     ]);
 
-      //redirige al index.php
-    header("Location: index.php");
+      //redirige al home.php
+    header("Location: home.php");
   }
 }
 
@@ -50,50 +50,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 <?php require("./partials/navbar.php"); ?>
 
 
-  <main>
-    <div class="container pt-5">
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <div class="card text-center" style="background-color: #363636;">
-            <div class="card-header" style="background-color: #ff9900;;">Edit contacts</div>
-            <div class="card-body">
-              <!-- si hay un error mandar un danger -->
-              <?php if ($error): ?> 
-                <p class="text-danger">
-                  <?= $error ?>
-                </p>
-              <?php endif ?>
-              <!-- pido el valor del id de nuevo para luego mandar los datos a actualizar -->
-              <form method="POST" action="edit.php?id=<?= $contact["id"] ?>">
-                <div class="mb-3 row">
-                  <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
-    
-                  <div class="col-md-6">
-                    <!-- asignamos con el value los datos a editar -->
-                    <input value="<?= $contact["name"] ?>" id="name" type="text" class="form-control" name="name" required autocomplete="name" autofocus>
-                  </div>
-                </div>
-    
-                <div class="mb-3 row">
-                  <label for="phone_number" class="col-md-4 col-form-label text-md-end">Phone Number</label>
-    
-                  <div class="col-md-6">
-                    <!-- asignamos con el value los datos a editar -->
-                    <input value="<?= $contact["phone_number"] ?>" id="phone_number" type="tel" class="form-control" name="phone_number" required autocomplete="phone_number" autofocus>
-                  </div>
-                </div>
-    
-                <div class="mb-3 row">
-                  <div class="col-md-6 offset-md-4">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </div>
-                </div>
-              </form>
+
+<div class="container pt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card text-center" style="background-color: #363636;">
+        <div class="card-header" style="background-color: #ff9900;;">Edit contacts</div>
+        <div class="card-body">
+          <!-- si hay un error mandar un danger -->
+          <?php if ($error): ?> 
+            <p class="text-danger">
+              <?= $error ?>
+            </p>
+          <?php endif ?>
+          <!-- pido el valor del id de nuevo para luego mandar los datos a actualizar -->
+          <form method="POST" action="edit.php?id=<?= $contact["id"] ?>">
+            <div class="mb-3 row">
+              <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
+
+              <div class="col-md-6">
+                <!-- asignamos con el value los datos a editar -->
+                <input value="<?= $contact["name"] ?>" id="name" type="text" class="form-control" name="name" required autocomplete="name" autofocus>
+              </div>
             </div>
-          </div>
+
+            <div class="mb-3 row">
+              <label for="phone_number" class="col-md-4 col-form-label text-md-end">Phone Number</label>
+
+              <div class="col-md-6">
+                <!-- asignamos con el value los datos a editar -->
+                <input value="<?= $contact["phone_number"] ?>" id="phone_number" type="tel" class="form-control" name="phone_number" required autocomplete="phone_number" autofocus>
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+              <div class="col-md-6 offset-md-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </main>
+  </div>
+</div>
 
-  <?php require("./partials/footer.php"); ?>
+
+<?php require("./partials/footer.php"); ?>

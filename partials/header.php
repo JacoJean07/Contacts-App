@@ -17,6 +17,9 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
     crossorigin="anonymous">
   </script>
+  <!-- static -->
+  <link rel="stylesheet" href="./static/css/index.css">
+
   <title>Contacts App</title>
 </head>
 <body style="background-color: rgb(75, 60, 46);">
