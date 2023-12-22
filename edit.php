@@ -12,12 +12,12 @@ if (!isset($_SESSION["user"])) {
 // USAREMOS EL METODO GET PARA BUSCAR EL ROW QUE VAMOS A ELIMINAR
 $id = $_GET["id"];
 //PRIMERO LO SOLICITAMOS A LA BASE DE DATOS, Y APARTE LIMITAMOS A QUE SOLO NOS DE UN ROW, EN CASO DE ALGUN ERROR EN LA BASE AUNQUE SEA IMPOSIBLE, APARTE AYUDA A QUE DE BIEN EL ARRAY ASOCIATIVO
-$statement = $conn->prepare("SELECT * FROM contacts WHERE id = :id LIMIT 1");
+$statement = $conn->prepare("SELECT * FROM contacts WHERE id = :id AND user_id = {$_SESSION['user']['id']} LIMIT 1");
 $statement->execute([":id" => $id]);
 //COMPROBAMOS QUE EL ID EXISTA, EN CASO DE QUE EL USUARIO NO SEA UN NAVEGADOR, Y SI NO EXISTE EL ID MANDAMOS UN ERROR
 if ($statement->rowCount() == 0) {
   http_response_code(404);
-  echo("HTTP 404 NOT FOUND (ID NO ENCONTRADO)");
+  echo("HTTP 404 NOT FOUND");
   return;
 }
 

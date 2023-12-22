@@ -9,7 +9,7 @@ if (!isset($_SESSION["user"])) {
   return;
 }
 
-//llamar los contactos de la base de datos
+//llamar los contactos de la base de datos y especificar que sean los que tengan el user_id de la funcion sesion_start
 $contacts = $conn->query("SELECT * FROM contacts WHERE user_id = {$_SESSION['user']['id']}");
 
 ?>
