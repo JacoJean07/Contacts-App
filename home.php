@@ -10,7 +10,7 @@ if (!isset($_SESSION["user"])) {
 }
 
 //llamar los contactos de la base de datos
-$contacts = $conn->query("SELECT * FROM contacts");
+$contacts = $conn->query("SELECT * FROM contacts WHERE user_id = {$_SESSION['user']['id']}");
 
 ?>
 

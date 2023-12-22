@@ -23,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $name = $_POST["name"];
     $phoneNumber = $_POST["phone_number"];
     
-    //mandar los datos a la base de datos
-    $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES (:name, :phone_number)");
+    //mandar los datos a la base de datos y tambien obtener el valor del user_id para mandarlo, no se hace un bindParam porque con la funcion sesion_start ya se obtiene el user
+    $statement = $conn->prepare("INSERT INTO contacts (user_id, name, phone_number) VALUES ({$_SESSION['user']['id']}, :name, :phone_number)");
     //sanitizar valores para inyecciones sql
     $statement->bindParam(":name", $_POST["name"]);
     $statement->bindParam(":phone_number", $_POST["phone_number"]);
