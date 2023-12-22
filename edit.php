@@ -46,8 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
       ":phone_number" => $_POST["phone_number"],
     ]);
 
+    //mensaje flash
+    $_SESSION["flash"] = ["message" => "Contact {$_POST['name']} edit."];
+
       //redirige al home.php
     header("Location: home.php");
+    //acabamos el codigo aqui porque ya nos redirige al home, y si dejamos que el codigo siga ejecutandose entonces no aparecera el mensaje flash
+    return;
   }
 }
 

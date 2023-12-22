@@ -22,7 +22,10 @@ if ($statement->rowCount() == 0) {
 
 //ELIMINAMOS EL ROW CON EL ID DE LA TARGETA SELECCIONADA, nos ahorramos dos statement y ejecutamos en la misma linea
 $conn->prepare("DELETE FROM contacts WHERE id = :id")->execute([":id" => $id]);
+//mensaje flash
+$_SESSION["flash"] = ["message" => "Contact delete."];
 //REDIRIGIMOShome
 header("Location: home.php");
-
+//acabamos el codigo aqui porque ya nos redirige al home, y si dejamos que el codigo siga ejecutandose entonces no aparecera el mensaje flash
+return;
 ?>

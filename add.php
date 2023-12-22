@@ -31,8 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     //ahora lo ejecutamos
     $statement->execute();
 
+    //mensaje flash
+    $_SESSION["flash"] = ["message" => "Contact {$_POST['name']} added."];
+
       //redirige al home.php
     header("Location: home.php");
+    //acabamos el codigo aqui porque ya nos redirige al home, y si dejamos que el codigo siga ejecutandose entonces no aparecera el mensaje flash
+    return;
   }
 }
 

@@ -18,7 +18,4 @@
     z-index: 1;
 }
 
-/* para que el contenido no se mezcle con el navbar */
-.container {
-    margin-top: 75px;
-}
+
