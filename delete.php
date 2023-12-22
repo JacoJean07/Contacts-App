@@ -1,6 +1,13 @@
 <?php
 
 require "database.php";
+//llamar a la funcion sesion para identificar las sesiones
+session_start();
+//si la sesion no existe, mandar al login.php y dejar de ejecutar el resto; se puede hacer un required para ahorra codigo
+if (!isset($_SESSION["user"])) {
+  header("Location: login.php");
+  return;
+}
 // USAREMOS EL METODO GET PARA BUSCAR EL ROW QUE VAMOS A ELIMINAR
 $id = $_GET["id"];
 //PRIMERO LO SOLICITAMOS A LA BASE DE DATOS
