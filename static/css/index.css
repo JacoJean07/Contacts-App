@@ -7,6 +7,7 @@
   background-repeat: no-repeat; 
   height: 100vh; /* Establece la altura al 100% del viewport height (altura de la ventana del navegador) */
   overflow: hidden; 
+  z-index: 2;
 }
 
 .navbar {
@@ -16,6 +17,10 @@
     width: 100%;
     /* para que se muestre delante de el contenido */
     z-index: 1;
+}
+
+.container {
+  margin-top: 70px;
 }
 
 

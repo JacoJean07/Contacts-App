@@ -12,7 +12,7 @@ if (!isset($_SESSION["user"])) {
 // USAREMOS EL METODO GET PARA BUSCAR EL ROW QUE VAMOS A ELIMINAR
 $id = $_GET["id"];
 //PRIMERO LO SOLICITAMOS A LA BASE DE DATOS, Y APARTE LIMITAMOS A QUE SOLO NOS DE UN ROW, EN CASO DE ALGUN ERROR EN LA BASE AUNQUE SEA IMPOSIBLE, APARTE AYUDA A QUE DE BIEN EL ARRAY ASOCIATIVO
-$statement = $conn->prepare("SELECT * FROM contacts WHERE id = :id AND user_id = {$_SESSION['user']['id']} LIMIT 1");
+$statement = $conn->prepare("SELECT * FROM adresses WHERE id = :id AND user_id = {$_SESSION['user']['id']} LIMIT 1");
 $statement->execute([":id" => $id]);
 //COMPROBAMOS QUE EL ID EXISTA, EN CASO DE QUE EL USUARIO NO SEA UN NAVEGADOR, Y SI NO EXISTE EL ID MANDAMOS UN ERROR
 if ($statement->rowCount() == 0) {
@@ -22,38 +22,33 @@ if ($statement->rowCount() == 0) {
 }
 
 //ASIGNAMOS LOS DATOS RECUPERADOS Y USAMOS UN FETCH PARA TRANSFORMALO A ALGO QUE NOSOTROS PODAMOS MANIPULAR, EN ESTE CASO EL ROW QUEREMOS QUE NOS LLEGUE DE MANERA ASOCIATIVA, UN ARRAY ASOCIATIVO
-$contact = $statement->fetch(PDO::FETCH_ASSOC);
+$adress = $statement->fetch(PDO::FETCH_ASSOC);
 
 $error = null;
 //identifica el metodo que usa el server, en este caso si el metodo es POST procesa el if
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   //se valida que no se envien datos vacios
-  if (empty($_POST["name"]) || empty($_POST["phone_number"]) || empty($_POST["adress"])) {
+  if (empty($_POST["name_adress"]) || empty($_POST["adress"])) {
     $error = "POR FAVOR RELLENA LOS CAMPOS";
-    //validacion del numero de telefono para que no sea menor a 9 numeros
-  } elseif (strlen($_POST["phone_number"]) < 9){
-    $error = "Numero invalido, minimo 10 caracteres";
   } else {
-    //declara variables y las asigna a los name de los input del form en caso de que el usuario no sea el navegador
-    $name = $_POST["name"];
-    $phoneNumber = $_POST["phone_number"];
+    //declara variables y las asigna a los name_adress de los input del form en caso de que el usuario no sea el navegador
+    $nameAdress = $_POST["name_adress"];
     $adress = $_POST["adress"];
     
     //actualizar los datos a la base de datos
-    $statement = $conn->prepare("UPDATE contacts SET name = :name, phone_number = :phone_number, adress = :adress WHERE id = :id");
+    $statement = $conn->prepare("UPDATE adresses SET name_adress = :name_adress, adress = :adress WHERE id = :id");
     $statement->execute([
       ":id" => $id,
-      ":name" => $_POST["name"],
-      ":phone_number" => $_POST["phone_number"],
+      ":name_adress" => $_POST["name_adress"],
       ":adress" => $_POST["adress"],
     ]);
 
     //mensaje flash
-    $_SESSION["flash"] = ["message" => "Contact {$_POST['name']} edit."];
+    $_SESSION["flash"] = ["message" => "Adress {$_POST['name_adress']} edit."];
 
-      //redirige al home.php
-    header("Location: home.php");
-    //acabamos el codigo aqui porque ya nos redirige al home, y si dejamos que el codigo siga ejecutandose entonces no aparecera el mensaje flash
+      //redirige al adresses.php
+    header("Location: adresses.php");
+    //acabamos el codigo aqui porque ya nos redirige al adresses, y si dejamos que el codigo siga ejecutandose entonces no aparecera el mensaje flash
     return;
   }
 }
@@ -70,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card text-center" style="background-color: #363636;">
-        <div class="card-header" style="background-color: #ff9900;;">Edit contacts</div>
+        <div class="card-header" style="background-color: #ff9900;;">Edit adress</div>
         <div class="card-body">
           <!-- si hay un error mandar un danger -->
           <?php if ($error): ?> 
@@ -79,22 +74,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             </p>
           <?php endif ?>
           <!-- pido el valor del id de nuevo para luego mandar los datos a actualizar -->
-          <form method="POST" action="edit.php?id=<?= $contact["id"] ?>">
+          <form method="POST" action="editAdress.php?id=<?= $adress["id"] ?>">
             <div class="mb-3 row">
-              <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
+              <label for="name_adress" class="col-md-4 col-form-label text-md-end">Name of Adress</label>
 
               <div class="col-md-6">
                 <!-- asignamos con el value los datos a editar -->
-                <input value="<?= $contact["name"] ?>" id="name" type="text" class="form-control" name="name" required autocomplete="name" autofocus>
-              </div>
-            </div>
-
-            <div class="mb-3 row">
-              <label for="phone_number" class="col-md-4 col-form-label text-md-end">Phone Number</label>
-
-              <div class="col-md-6">
-                <!-- asignamos con el value los datos a editar -->
-                <input value="<?= $contact["phone_number"] ?>" id="phone_number" type="tel" class="form-control" name="phone_number" required autocomplete="phone_number" autofocus>
+                <input value="<?= $adress["name_adress"] ?>" id="name_adress" type="text" class="form-control" name="name_adress" required autocomplete="name_adress" autofocus>
               </div>
             </div>
 
@@ -103,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
               <div class="col-md-6">
                 <!-- asignamos con el value los datos a editar -->
-                <input value="<?= $contact["adress"] ?>" id="adress" type="text" class="form-control" name="adress" required autocomplete="adress" autofocus>
+                <input value="<?= $adress["adress"] ?>" id="adress" type="tel" class="form-control" name="adress" required autocomplete="adress" autofocus>
               </div>
             </div>
 

@@ -15,6 +15,14 @@ CREATE TABLE contacts (
     user_id INT NOT NULL,
     name VARCHAR(255),
     phone_number VARCHAR(255),
+    adress VARCHAR(255),
     Foreign Key (user_id) REFERENCES users(id)
 );
 
+nCREATE TABLE adresses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    name_adress VARCHAR(255),
+    adress VARCHAR(255),
+    Foreign Key (user_id) REFERENCES users(id)
+);
